@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:latest
+    restart: "unless-stopped"
+    ports:
+      - ${WSJR_DATABASE_PORT:-5432}:5432
+    environment:
+      POSTGRES_USER: ${WSJR_DATABASE_USER}
+      POSTGRES_PASSWORD: ${WSJR_DATABASE_PASSWORD}
+      POSTGRES_DB: ${WSJR_DATABASE_NAME}
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: "local"
